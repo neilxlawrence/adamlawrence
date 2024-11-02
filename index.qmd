@@ -1,0 +1,68 @@
+---
+title: "Neil Lawrnece"
+---
+
+Website development - this is a sandbox
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# setting echo to false means it won't render
+
+library(googlesheets4)
+library(jsonlite)
+library(htmltools)
+
+# Paste the JSON content as a single string with proper escaping
+json_content <- '{
+  "type": "service_account",
+  "project_id": "formal-shell-440518-r9",
+  "private_key_id": "58a03805e5ab50e8757a382cd28d935fc36fc976",
+  "private_key": "-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCoZV6zBoJI2NR2\\nsYUcQPfP/snWS7gnikD65Bn2s3pn7As1BqB5inkcGbtsdCT3fyczdL56p8Ci8dXH\\nMjjU3b07FEtpnoDI2cfxuPz4A5MeGeSEDb/5FO4vmU3ToP3oJIE5X3JKd69iOgYt\\n/JPi8O75/RHomue2v1+TzmWPRCR2ZG6jIpLWKwEi3rjn5DSJdftTKWI564IxoC2m\\nj8+fDlIR5308MLEBQSdDHT3QvaocZ9WWkd+lVGenod6FUhgx0IFuGxxkjo0drGR4\\nFbrCS3GWNvRyfpkiOtQriYo4erbxxjv1jdR9RHyWZDcq1dY+zGJUf85W4By7s2/n\\nd77zomIxAgMBAAECggEATzJNlVjMUUJYufHHLoCHi7TCbBx0YXQuF1DLvTCvssxa\\ngPe65S5wwvx/HwSIljWg1BxlsP3QJVIjPmmqPMKESpLC3MuEufFijZZ4spPLzu5S\\ngKCO1rA3TP+GkK84esMgW0E+WTNssn+jhGEzlBnH6p5Qm9que04Jv1Pkg7qCg4L4\\nTEG7ePAYW5EnWDWGE23/pWFE3BmjP0FtXCi/cHwSgwUl1miPftKNRpwJdECS6FKG\\nmniyjlLybqa3OMp/Mc8iJrLyLgRRlTBi7mgcvYrPYZIXHwTCNLs3dTKYVfsWPzE1\\nXG4baTDIEW/7Q2nvYLZy7bZ5b9IVUuhFPXQpKuw8WQKBgQDi53ZVvMi5OylMAJ7O\\nvzZNJUOz7DvQKdS/LW7yTybtqHSwpImEp7wTVB2ni0qXid/U3iv+svEZ0K8tJTt+\\nfnGT4EQaEZ0f3em3uc68pju8FqEIWkh0LFnLENPOb8uW1pMWMPWt+bMiaXCYNNWx\\nFS1m4S6KpgF8sHUQ7fVKZaNRlwKBgQC9/UV7a4PKyj5yOXDmmrj8Pe+yFFsZMnbK\\ncBuAl9G0uDCYXpbUDErjDYk6vU0jirqCvzboz+xTfasQqb79zJFYHkjS6CB9kM7q\\nnVP5KYl69M0EUlHPGYx7PRQj//BS3mO7SomRHaeRaDRZpWh9+pykmqiQogofB9u2\\nyQ8MykjTdwKBgQCyCcoJRiL9bJVfxFDXiqNx7t5rq93W3SvIgj6+tCqoafh9re0V\\ngIOLawIFt77kntNZdKZyqDeT+PGq67795vr5fAwTpGR0X6yGc63qykiusdbS9fxJ\\n447lTiPTpFbL2Tv6OppbU0UiqDcnxrUxyJsiUWgydEVQcCi7Cuvf31ZBqwKBgFNw\\nHcm8SB8RfydPDsRYAxHUaaZ9xhxky0LQxWNOSazij4T7VaY+18yrry764BvR22N8\\ncrMATbvFHxGsWtK/ur1GX5kwlMRQim8DNVPh6Bz10ewp8v/PKqEdC/Fbf8IFJSul\\n6pCuw17astMED8X0AENSIOGUKHnES7wUxOVLGXy1AoGAWycOfMyvHr/A2Yr1hMmO\\nSp9oaKPq5JRDtoq1bRUcfueoafXR0GKSagEObKwV0Eiw8Awize1OGQ8qAWK1UOEW\\nsK2Z/Lzj5mAFh3JQrJ7vT4DmHCre23NlE0iVeJ+iBuDZFWbt4ye72mrhsttYysWV\\nHkR8WjdkHNaJb2fiymtV2y8=\\n-----END PRIVATE KEY-----\\n",
+  "client_email": "neilxlawrence@formal-shell-440518-r9.iam.gserviceaccount.com",
+  "client_id": "107461827611431115321",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/neilxlawrence%40formal-shell-440518-r9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}'
+
+# Create a temporary file for the credentials
+temp_file <- tempfile(fileext = ".json")
+
+# Write the JSON content to the temporary file
+writeLines(json_content, temp_file)
+
+# Authenticate using the service account JSON file
+gs4_auth(path = temp_file)
+
+# Specify the Google Sheet ID and the specific cell
+sheet_id <- "1kezt1HWYwXkGN8OFggV5vK90R5IhZ7GwoXsORzXByOo"
+cell_data <- read_sheet(sheet_id, range = "bridge_events!A3", col_names = FALSE)
+
+# Display the cell data
+cell_data_value <- cell_data[[1, 1]]
+
+cell_data_value <- htmltools::HTML(paste("<span style='font-family: Arial; font-size: 14px;'>", 
+                      cell_data_value, 
+                      "</span>"))
+
+output <- HTML(paste("<span style='font-family: Arial; font-size: 14px;'>", 
+                      cell_data_value, 
+                      "</span>"))
+
+```
+
+```{r, echo=FALSE}
+# i have separated this chunk - echo is false so the code doesen't print, but whatever is in the variable dose print
+
+# cat(output) - this will not provide what you want, instead the html has already created the output, so just print it as is
+output
+
+```
+
+
+
+```{r}
+```

@@ -1,0 +1,54 @@
+project:
+  type: website
+  output-dir: "docs"
+  
+website:
+  title: "Proponomix"
+  description: "Here you will learn about the sweet spot where economics informs the property market"
+
+
+  navbar:
+    tools: 
+      - icon: youtube
+        href: https://www.youtube.com/channel/UC7ri7i0YPUt0empuq_JWu4Q
+      - icon: twitter-x
+        href: https://x.com/BridgePaedsR_yh
+      - icon: google
+        href: mailto:bridge.paedsresearch.yh@gmail.com #
+  
+    background: black
+  
+    foreground: white
+  
+    search: true
+  
+    logo: images/propenomix.png
+    
+    pinned: true #whether to always show the nav bar
+    
+    collapse: true #collapse the navbar items when its a narrow view
+    left:
+      - href: index.qmd
+        text: Home
+#      - about.qmd
+
+      - href: propenomix_videos.qmd
+        text: Propenomix videos
+        
+      - href: propenomix_videos.qmd
+        text: Propenomix videos
+
+format:
+  
+  html:
+  
+    theme: cosmo
+  
+    css: styles.css
+  
+    toc: false #this stops the index 'on this page' appearing in the top right of the page
+
+editor: visual
+
+
+
