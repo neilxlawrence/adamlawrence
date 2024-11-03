@@ -12,14 +12,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Quarto
+      - name: Install dependencies
         run: |
-          # Install dependencies
           sudo apt-get update
-          sudo apt-get install -y wget
+          sudo apt-get install -y wget curl
           # Download the latest Quarto release
           LATEST=$(curl -s https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/${LATEST}/quarto-linux-amd64.deb
+          wget https://github.com/quarto-dev/quarto-cli/releases/download/$LATEST/quarto-linux-amd64.deb
           # Install Quarto
           sudo dpkg -i quarto-linux-amd64.deb
           
