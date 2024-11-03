@@ -1,5 +1,5 @@
 ---
-title: "Neil Lawrnece"
+title: "Neil Lawrence"
 ---
 
 Website development - this is a sandbox
@@ -12,6 +12,10 @@ To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 library(googlesheets4)
 library(jsonlite)
 library(htmltools)
+
+# Example of setting timeout for a request
+gs4_deauth()  # Deauthenticate if needed
+options(googlesheets4.timeout = 300)  # Set timeout to 30 seconds
 
 # Paste the JSON content as a single string with proper escaping
 json_content <- '{
@@ -39,17 +43,95 @@ gs4_auth(path = temp_file)
 
 # Specify the Google Sheet ID and the specific cell
 sheet_id <- "1kezt1HWYwXkGN8OFggV5vK90R5IhZ7GwoXsORzXByOo"
-cell_data <- read_sheet(sheet_id, range = "bridge_events!A3", col_names = FALSE)
 
-# Display the cell data
-cell_data_value <- cell_data[[1, 1]]
+cell_data <- 
+  read_sheet(sheet_id, 
+             range = "bridge_events!A3:E33", 
+             col_names = FALSE)
 
-cell_data_value <- htmltools::HTML(paste("<span style='font-family: Arial; font-size: 14px;'>", 
-                      cell_data_value, 
+# extract the data from the first row
+presenter_data_value_row_1 <- 
+  cell_data[[1, 1]]
+
+talk_data_value_row_1 <- 
+  cell_data[[1, 2]]
+
+date_day_number_row_1 <- 
+  cell_data[[1, 3]] 
+
+date_month_text_row_1 <-  
+  cell_data[[1, 4]]
+
+date_year_number_row_1 <-  
+  cell_data[[1, 5]]
+
+
+concatenated_data_value_row_1 <-
+  
+  paste0(
+    "On ",
+    date_day_number_row_1,
+    " ",
+    date_month_text_row_1,
+    " ",
+    date_year_number_row_1,
+    " ",
+    presenter_data_value_row_1, 
+    " will talk on \"",
+    talk_data_value_row_1,
+    "\"")
+
+
+# extract the data from the first row
+presenter_data_value_row_2 <- 
+  cell_data[[2, 1]]
+
+talk_data_value_row_2 <- 
+  cell_data[[2, 2]]
+
+date_day_number_row_2 <- 
+  cell_data[[2, 3]] 
+
+date_month_text_row_2 <-  
+  cell_data[[2, 4]]
+
+date_year_number_row_2 <-  
+  cell_data[[2, 5]]
+
+
+concatenated_data_value_row_2 <-
+  
+  paste0(
+    "On ",
+    date_day_number_row_2,
+    " ",
+    date_month_text_row_2,
+    " ",
+    date_year_number_row_2,
+    " ",
+    presenter_data_value_row_2, 
+    " will talk on \"",
+    talk_data_value_row_2,
+    "\"")
+
+# put all the rows together
+
+concatenated_data_value <-
+    paste0(
+      concatenated_data_value_row_1,
+      "\n\n\n",
+      concatenated_data_value_row_2)
+
+
+output_data_value <- 
+  htmltools::HTML(
+    paste("<span style='font-family: Arial; font-size: 14px;'>", 
+                      concatenated_data_value, 
                       "</span>"))
 
+# refine the output into the font we want
 output <- HTML(paste("<span style='font-family: Arial; font-size: 14px;'>", 
-                      cell_data_value, 
+                      output_data_value, 
                       "</span>"))
 
 ```
@@ -61,8 +143,6 @@ output <- HTML(paste("<span style='font-family: Arial; font-size: 14px;'>",
 output
 
 ```
-
-
 
 ```{r}
 ```
