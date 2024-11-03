@@ -3,7 +3,8 @@ name: Update Site
 on:
   schedule:
     - cron: '0 * * * *'  # This example runs the script hourly; adjust as needed.
-
+  workflow_dispatch:     # This line enables manual runs.
+  
 jobs:
   update-site:
     runs-on: ubuntu-latest
