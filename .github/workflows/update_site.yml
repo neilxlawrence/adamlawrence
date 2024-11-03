@@ -17,13 +17,11 @@ jobs:
       - name: Install dependencies
         run: R -e "install.packages(c('googlesheets4', 'jsonlite', 'htmltools', 'quarto'))"
 
-      - name: Run script and render site
-        run: |
-          Rscript -e "source('path/to/your_script.R')"  # Adjust to the path of your script
-          quarto render
-
+      - name: Render Quarto site
+        run: quarto render index.qmd  # Render just the index.qmd file with the Google Sheets code
+        
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site  # Adjust to your Quarto output directory
+          publish_dir: ./docs
