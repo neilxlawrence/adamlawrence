@@ -14,7 +14,12 @@ jobs:
 
       - name: Install Quarto
         run: |
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.57/quarto-linux-amd64.deb
+          # Install dependencies
+          sudo apt-get update
+          sudo apt-get install -y wget
+          # Download the latest Quarto release
+          wget https://github.com/quarto-dev/quarto-cli/releases/latest/download/quarto-linux-amd64.deb
+          # Install Quarto
           sudo dpkg -i quarto-linux-amd64.deb
           
       - name: Set up R environment
