@@ -14,11 +14,16 @@ jobs:
 
       - name: Install dependencies
         run: |
+          # Update package list and install required tools
           sudo apt-get update
           sudo apt-get install -y wget curl
-          # Download the latest Quarto release
+          
+          # Get the latest Quarto release version
           LATEST=$(curl -s https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/$LATEST/quarto-linux-amd64.deb
+          
+          # Download the latest Quarto release
+          wget https://github.com/quarto-dev/quarto-cli/releases/download/${LATEST}/quarto-linux-amd64.deb
+          
           # Install Quarto
           sudo dpkg -i quarto-linux-amd64.deb
           
