@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Neil Lawrence",
     "section": "",
-    "text": "Website development - this is a sandbox\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n  On 5 December 2024 Professor Paul Dimitri will talk on \"How technology (including AI) is changing Paediatric Research\"\n\n\nOn 32 Notmember 2027 Test Professor will talk on \"This event is filled\""
+    "text": "Website development - this is a sandbox\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
     "objectID": "propenomix_videos.html",
@@ -19,5 +19,12 @@
     "title": "",
     "section": "",
     "text": "Videos\n\n\nAdd appropriate links\n\n\n\n\n\n\n\n\n\nInsert further videos below"
+  },
+  {
+    "objectID": "index_previous_not_to_use.html",
+    "href": "index_previous_not_to_use.html",
+    "title": "Neil Lawrence",
+    "section": "",
+    "text": "Website development - this is a sandbox\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   }
 ]
