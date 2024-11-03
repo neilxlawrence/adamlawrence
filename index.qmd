@@ -4,37 +4,38 @@ title: "Neil Lawrence"
 
 Website development - this is a sandbox
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# setting echo to false means it won't render
-
-library(googlesheets4)
-library(jsonlite)
-library(htmltools)
-
-```
-
+This is working now - this bit won't update until I recommit, but the Google Sheet does
 
 ```{html, echo=FALSE}
 <div id="sheet-data"></div>
-  
+
 <script>
     async function fetchSheetData() {
         const url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSMongDgzsyxPpmkcU2OrGn2ktM07LqK9qqSWct6rwIOxLKr_5AQ9_jwzBNIapiXdVdtTSqb3q3bcE2/pub?output=csv'; 
+        
         const response = await fetch(url);
         const data = await response.text();
         const rows = data.split('\n');
         let html = '<ul>';
 
-        rows.forEach(row => {
-            const cells = row.split(',');
-            html += '<li>' + cells.join(' - ') + '</li>';
-        });
+        // Example: Print specific cells from the sheet
+        if (rows.length > 2) {
+            const cells1 = rows[2].split(','); // Get third row
+            const singleCellValue1 = cells1[1]; // Get second cell from third row
+            html += '<li>' + singleCellValue1 + '</li>'; // Add it to the list
+
+            const cells2 = rows[3].split(','); // Get fourth row
+            const singleCellValue2 = cells2[1]; // Get second cell from fourth row
+            html += '<li>' + singleCellValue2 + '</li>'; // Add it to the list
+        }
+
         html += '</ul>';
-        document.getElementById('sheet-data').innerHTML = html;
+        document.getElementById('sheet-data').innerHTML = html; // Print the HTML for the first part
+
+        // Now append something else specific
+        const additionalContent = "<p>This is some additional content after the list.</p>";
+        document.getElementById('sheet-data').innerHTML += additionalContent; // Append additional content
     }
 
-    fetchSheetData();
+    fetchSheetData(); // Call the function to fetch data
 </script>
-
